@@ -50,6 +50,14 @@ updated_at: 2026-03-07
   - 중복 감지 시 `docs/ops/push-logs/duplicates.log`에 기록
 - DoD: PASS (동일 실행 2회 테스트로 중복 스킵 + duplicates.log 기록 확인)
 
+### T5 — 실패 복구 플로우 ✅
+- 상태: done
+- 완료 내용:
+  - recovery queue(JSONL) enqueue/retry/deadletter 도입
+  - daily 23:00(KST) 스케줄 워커로 pending 재시도
+  - 3회 실패 시 deadletter 이동
+- DoD: PASS (샘플 enqueue→retry→deadletter 검증)
+
 ### T6 — 주간 요약 자동 생성 ✅
 - 상태: done
 - 완료 내용:

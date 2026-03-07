@@ -37,9 +37,11 @@ updated_at: 2026-03-07
 - 키가 동일하면 **생성 스킵 + duplicates.log에 기록**
 
 ## 장애/복구 (확정)
-- 실패 로그 저장
-- 즉시 1회 재시도
-- 재시도 실패 시 daily 23:00 보정으로 누락 복구
+- 실패 시 recovery queue에 enqueue (파일 기반 MVP)
+  - queue: `docs/ops/recovery-queue.jsonl`
+  - deadletter: `docs/ops/recovery-deadletter.jsonl`
+- daily 23:00(KST)에 pending 순회 재실행 (`.github/workflows/recovery-queue.yml`)
+- 3회 실패 시 deadletter로 이동
 
 ## 검증 기준
 - 이벤트 누락 없음

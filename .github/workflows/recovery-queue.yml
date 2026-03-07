@@ -1,0 +1,44 @@
+name: recovery-queue
+
+on:
+  schedule:
+    # Daily 23:00 KST = 14:00 UTC
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: recovery-queue
+  cancel-in-progress: false
+
+jobs:
+  run-recovery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run pending recovery jobs
+        run: |
+          python3 scripts/recovery_queue.py run-pending --max-retries 3
+
+      - name: Commit and push queue updates (if changed)
+        run: |
+          set -e
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "vibe-coding-study bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/ops/recovery-queue.jsonl docs/ops/recovery-deadletter.jsonl || true
+          if git diff --cached --quiet; then
+            echo "No staged changes"
+            exit 0
+          fi
+          git commit -m "chore: process recovery queue"
+          git push
