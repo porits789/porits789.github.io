@@ -24,13 +24,16 @@ jobs:
 
       - name: Prepare evidence dir
         run: |
-          echo "EVIDENCE_DIR=/tmp/security-scan-${{ github.run_id }}" >> $GITHUB_ENV
-          mkdir -p "/tmp/security-scan-${{ github.run_id }}"
+          echo "EVIDENCE_DIR=${RUNNER_TEMP}/security-scan-${{ github.run_id }}" >> $GITHUB_ENV
+          mkdir -p "${RUNNER_TEMP}/security-scan-${{ github.run_id }}"
 
       - name: Secrets scan (gitleaks)
-        uses: gitleaks/gitleaks-action@v2
-        with:
-          args: "detect --source . --report-format json --report-path /tmp/security-scan-${{ github.run_id }}/gitleaks.json --no-git --redact"
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/repo" \
+            -v "${EVIDENCE_DIR}:/evidence" \
+            zricethezav/gitleaks:latest \
+            detect --source=/repo --report-format json --report-path /evidence/gitleaks.json --redact
 
       - name: SAST scan (semgrep) - High (fail)
         run: |
@@ -44,12 +47,14 @@ jobs:
         run: |
           semgrep scan --config p/ci --severity WARNING --json -o "${EVIDENCE_DIR}/semgrep_medium.json" || true
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
       - name: Build site (for exposure checks)
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ruby-full build-essential
-          gem install bundler
-          bundle install
           bundle exec jekyll build
 
       - name: Exposure checks (robots/sitemap/meta/canonical)
@@ -61,4 +66,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: security-gate-evidence-${{ github.run_id }}
-          path: /tmp/security-scan-${{ github.run_id }}
+          path: ${{ env.EVIDENCE_DIR }}
