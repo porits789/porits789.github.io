@@ -1,0 +1,74 @@
+name: security-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-gate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare evidence dir
+        run: |
+          echo "EVIDENCE_DIR=/tmp/security-scan-${{ github.run_id }}" >> $GITHUB_ENV
+          mkdir -p "/tmp/security-scan-${{ github.run_id }}"
+
+      - name: Secrets scan (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          args: "detect --source . --report-format json --report-path ${{ env.EVIDENCE_DIR }}/gitleaks.json --no-git --redact"
+
+      - name: SAST scan (semgrep) — High (fail)
+        run: |
+          python -m pip install --upgrade pip
+          pip install semgrep==1.62.0
+          semgrep scan --config p/ci --severity ERROR --json -o "${EVIDENCE_DIR}/semgrep_high.json"
+          python - <<'PY'
+import json,sys
+p=sys.argv[1]
+with open(p,'r',encoding='utf-8') as f:
+  data=json.load(f)
+results=data.get('results',[])
+if results:
+  print(f"FAIL: semgrep high findings={len(results)}")
+  sys.exit(1)
+print("PASS: semgrep high 0")
+PY "${EVIDENCE_DIR}/semgrep_high.json"
+
+      - name: SAST scan (semgrep) — Medium (warn only)
+        if: always()
+        run: |
+          semgrep scan --config p/ci --severity WARNING --json -o "${EVIDENCE_DIR}/semgrep_medium.json" || true
+
+      - name: Build site (for exposure checks)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ruby-full build-essential
+          gem install bundler
+          bundle install
+          bundle exec jekyll build
+
+      - name: Exposure checks (robots/sitemap/meta/canonical)
+        run: |
+          bash scripts/check_public_exposure.sh _site | tee "${EVIDENCE_DIR}/exposure.txt"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-gate-evidence-${{ github.run_id }}
+          path: ${{ env.EVIDENCE_DIR }}

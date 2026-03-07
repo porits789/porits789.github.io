@@ -43,5 +43,9 @@ updated_at: 2026-03-07
 ## 롤백 원칙
 - 공개 후 이슈 발견 시 즉시 비노출/롤백
 
+## CI Gate (확정)
+- GitHub Actions workflow: `.github/workflows/security-gate.yml`
+- Evidence: artifact `security-gate-evidence-<run_id>` (내부 경로는 `/tmp/security-scan-<run_id>`)
+
 ## 미결사항(TBD)
-- 정식 CI 보안게이트 파이프라인 위치
+- 의존성 취약점(osv/audit) 게이트화

@@ -58,6 +58,12 @@ updated_at: 2026-03-07
   - 섹션 고정: 배운 점 / 문제 / 다음 액션
 - DoD: PASS (로컬 샘플 실행으로 생성/렌더 확인)
 
+### T7 — 보안/릴리즈 게이트 연결 (진행 중)
+- 상태: in-progress
+- 목표:
+  - gitleaks / semgrep / 노출 점검 자동화
+  - PASS/FAIL evidence 저장 및 RELEASE_CHECKLIST 연결
+
 ## 운영 룰 참조
 - 프로젝트 운영/보고 규칙은 `docs/plan/PROJECT_RULES.md`를 기준으로 한다.
 - 특히, 사용자 트리거 없이도 각 T 완료 시 즉시 사용자 안내를 수행한다.
