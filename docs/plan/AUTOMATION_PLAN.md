@@ -21,7 +21,7 @@ updated_at: 2026-03-07
 ## 트리거 (확정)
 - Event: push to main
 - Schedule: daily 23:00 (KST)
-- Weekly: 일요일 23:00 (KST)
+- Weekly: 일요일 23:00 (KST) → GitHub Actions cron: `0 14 * * 0` (UTC)
 
 ## 처리 플로우(확정)
 1. push(main) 이벤트 수신

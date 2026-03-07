@@ -50,6 +50,14 @@ updated_at: 2026-03-07
   - 중복 감지 시 `docs/ops/push-logs/duplicates.log`에 기록
 - DoD: PASS (동일 실행 2회 테스트로 중복 스킵 + duplicates.log 기록 확인)
 
+### T6 — 주간 요약 자동 생성 ✅
+- 상태: done
+- 완료 내용:
+  - GitHub Actions 스케줄(일 23:00 KST)로 주간 요약 자동 생성
+  - 파일 규칙 확정: `_posts/{YYYY-MM-DD}-weekly-highlights-{YYYY}-w{WW}.md`
+  - 섹션 고정: 배운 점 / 문제 / 다음 액션
+- DoD: PASS (로컬 샘플 실행으로 생성/렌더 확인)
+
 ## 운영 룰 참조
 - 프로젝트 운영/보고 규칙은 `docs/plan/PROJECT_RULES.md`를 기준으로 한다.
 - 특히, 사용자 트리거 없이도 각 T 완료 시 즉시 사용자 안내를 수행한다.

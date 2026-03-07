@@ -23,9 +23,10 @@ updated_at: 2026-03-07
 - 주간 요약은 `categories: [weekly]`로 구분
 
 ## 포스트 유형
-- push-log (자동, push마다 1포스트)
-- weekly-summary (자동, category: weekly)
+- weekly-summary (자동, categories: [weekly])
 - manual-note (수동)
+
+> push-log는 블로그 포스트가 아니라 내부 운영 로그(`docs/ops/push-logs/`)로 유지한다.
 
 ## Frontmatter 규칙(확정)
 - title:
