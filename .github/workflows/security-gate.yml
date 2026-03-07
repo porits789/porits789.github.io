@@ -37,17 +37,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install semgrep==1.62.0
           semgrep scan --config p/ci --severity ERROR --json -o "${EVIDENCE_DIR}/semgrep_high.json"
-          python - <<'PY'
-import json,sys
-p=sys.argv[1]
-with open(p,'r',encoding='utf-8') as f:
-  data=json.load(f)
-results=data.get('results',[])
-if results:
-  print(f"FAIL: semgrep high findings={len(results)}")
-  sys.exit(1)
-print("PASS: semgrep high 0")
-PY "${EVIDENCE_DIR}/semgrep_high.json"
+          python -c 'import json,sys; p=sys.argv[1]; data=json.load(open(p,"r",encoding="utf-8")); results=data.get("results",[]); print(f"semgrep_high_findings={len(results)}"); sys.exit(1 if results else 0)' "${EVIDENCE_DIR}/semgrep_high.json"
 
       - name: SAST scan (semgrep) - Medium (warn only)
         if: always()
