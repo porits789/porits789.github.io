@@ -20,7 +20,7 @@ updated_at: 2026-03-07
 
 ## 디렉토리 구조(확정)
 - `_posts/` 단일 경로 사용
-- 주간 요약은 `category: weekly`로 구분
+- 주간 요약은 `categories: [weekly]`로 구분
 
 ## 포스트 유형
 - push-log (자동, push마다 1포스트)
