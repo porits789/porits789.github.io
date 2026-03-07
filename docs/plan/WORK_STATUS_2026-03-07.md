@@ -31,3 +31,9 @@ updated_at: 2026-03-07
   - 샘플 포스트 2개(weekly 포함) 추가
   - 랜딩에서 weekly 분리 표시 확인(Recent Experiments에서 weekly 제외)
 - DoD: PASS
+
+### T3 — Push 이벤트 자동 포스트 생성기 (진행 중)
+- 상태: in-progress
+- 목표:
+  - push(main) 시 _posts에 1개 포스트 자동 생성
+  - source에 commit hash 포함
