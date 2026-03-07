@@ -30,9 +30,9 @@ jobs:
       - name: Secrets scan (gitleaks)
         uses: gitleaks/gitleaks-action@v2
         with:
-          args: "detect --source . --report-format json --report-path ${{ env.EVIDENCE_DIR }}/gitleaks.json --no-git --redact"
+          args: "detect --source . --report-format json --report-path /tmp/security-scan-${{ github.run_id }}/gitleaks.json --no-git --redact"
 
-      - name: SAST scan (semgrep) — High (fail)
+      - name: SAST scan (semgrep) - High (fail)
         run: |
           python -m pip install --upgrade pip
           pip install semgrep==1.62.0
@@ -49,7 +49,7 @@ if results:
 print("PASS: semgrep high 0")
 PY "${EVIDENCE_DIR}/semgrep_high.json"
 
-      - name: SAST scan (semgrep) — Medium (warn only)
+      - name: SAST scan (semgrep) - Medium (warn only)
         if: always()
         run: |
           semgrep scan --config p/ci --severity WARNING --json -o "${EVIDENCE_DIR}/semgrep_medium.json" || true
@@ -71,4 +71,4 @@ PY "${EVIDENCE_DIR}/semgrep_high.json"
         uses: actions/upload-artifact@v4
         with:
           name: security-gate-evidence-${{ github.run_id }}
-          path: ${{ env.EVIDENCE_DIR }}
+          path: /tmp/security-scan-${{ github.run_id }}
