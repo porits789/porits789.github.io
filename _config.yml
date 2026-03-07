@@ -1,0 +1,22 @@
+title: Vibe Coding Study
+
+description: "실험하고 기록하고, 배운 것을 자산으로 남깁니다."
+
+# URL settings for GitHub Pages user site
+url: "https://porits789.github.io"
+baseurl: ""
+
+# Posts
+permalink: /blog/:year/:month/:title
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
