@@ -42,12 +42,13 @@ updated_at: 2026-03-07
   - 변경 정책: push 로그를 **블로그 포스트(_posts)** 로 만들지 않고, **내부 운영 로그(`docs/ops/push-logs`)** 로 저장
 - DoD: PASS (워크플로 실행 성공 + 내부 로그 커밋 확인)
 
-### T4 — 중복 방지 및 idempotency (진행 중)
-- 상태: in-progress
-- 목표:
-  - 중복 키 `{date}-{commitHash|eventId}` 적용
-  - 동일 이벤트 재실행 시 중복 파일 생성 방지
-  - 중복 감지 로그 남김
+### T4 — 중복 방지 및 idempotency ✅
+- 상태: done
+- 완료 내용:
+  - 중복 키 `{date}-{commitHash|eventId}`를 내부 push-log에 적용
+  - 동일 키가 이미 존재하면 생성 스킵(idempotent)
+  - 중복 감지 시 `docs/ops/push-logs/duplicates.log`에 기록
+- DoD: PASS (동일 실행 2회 테스트로 중복 스킵 + duplicates.log 기록 확인)
 
 ## 운영 룰 참조
 - 프로젝트 운영/보고 규칙은 `docs/plan/PROJECT_RULES.md`를 기준으로 한다.
