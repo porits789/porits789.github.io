@@ -9,8 +9,19 @@
   </head>
   <body>
     <header class="site-header">
-      <div class="container">
+      <div class="container header-inner">
         <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+
+        <div class="header-actions">
+          <nav class="top-nav" aria-label="Main navigation">
+            <a href="{{ '/' | relative_url }}#recent">Recent</a>
+            <a href="{{ '/' | relative_url }}#weekly">Weekly</a>
+            <a href="{{ '/' | relative_url }}#next">Next</a>
+          </nav>
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+            🌙
+          </button>
+        </div>
       </div>
     </header>
 
@@ -23,5 +34,30 @@
         <small class="muted">© {{ site.time | date: '%Y' }} {{ site.title }}</small>
       </div>
     </footer>
+
+    <script>
+      (function () {
+        const root = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function apply(mode) {
+          root.setAttribute('data-theme', mode);
+          if (btn) btn.textContent = mode === 'dark' ? '☀️' : '🌙';
+        }
+
+        const initial = saved || (prefersDark ? 'dark' : 'light');
+        apply(initial);
+
+        if (btn) {
+          btn.addEventListener('click', function () {
+            const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', next);
+            apply(next);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

@@ -1,20 +1,38 @@
-:root{--max:820px;--fg:#111;--muted:#666;--bg:#fff;--border:#e6e6e6;}
+:root{--max:900px;--fg:#111827;--muted:#4b5563;--bg:#ffffff;--header-bg:#f8fafc;--border:#e5e7eb;--link:#4b2e83;--link-hover:#2f1b57}
+:root[data-theme='dark']{--fg:#f3f4f6;--muted:#c5cad3;--bg:#0f172a;--header-bg:#111827;--border:#27324a;--link:#c4b5fd;--link-hover:#ddd6fe}
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;line-height:1.6;color:var(--fg);background:var(--bg)}
 .container{max-width:var(--max);margin:0 auto;padding:24px}
-.site-header{border-bottom:1px solid var(--border);background:#fafafa}
-.site-title{font-weight:700;text-decoration:none;color:var(--fg)}
-.site-footer{border-top:1px solid var(--border);background:#fafafa;margin-top:48px}
+.site-header{border-bottom:1px solid var(--border);background:var(--header-bg);position:sticky;top:0;z-index:10}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.site-title{font-weight:700;text-decoration:none;color:var(--fg);font-size:28px;line-height:1.1}
+.header-actions{display:flex;align-items:center;gap:14px}
+.top-nav{display:flex;align-items:center;gap:12px}
+.top-nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.top-nav a:hover{color:var(--fg)}
+.theme-toggle{border:1px solid var(--border);background:transparent;color:var(--fg);border-radius:999px;padding:6px 10px;cursor:pointer;font-size:14px;line-height:1}
+.site-footer{border-top:1px solid var(--border);background:var(--header-bg);margin-top:48px}
 .hero{padding:28px 0 8px}
-.hero h1{font-size:40px;line-height:1.2;margin:0 0 8px}
-.subtitle{font-size:18px;color:var(--muted);margin:0}
-.section{margin-top:28px}
+.hero h1{font-size:56px;line-height:1.15;margin:0 0 12px;letter-spacing:-0.02em}
+.subtitle{font-size:26px;color:var(--muted);margin:0}
+.section{margin-top:30px}
+.section h2{font-size:22px;margin:0 0 8px}
 .post-list{list-style:none;padding:0;margin:12px 0}
-.post-list li{padding:12px 0;border-bottom:1px solid var(--border)}
-.post-list a{text-decoration:none}
+.post-list li{padding:14px 0;border-bottom:1px solid var(--border)}
+.post-list a{text-decoration:none;color:var(--link);font-weight:600}
+.post-list a:hover{color:var(--link-hover)}
 .meta{color:var(--muted);font-size:12px;margin-left:8px}
 .excerpt{margin:6px 0 0;color:var(--muted)}
 .muted{color:var(--muted)}
 .post h1{margin-bottom:6px}
 .summary{color:var(--muted);margin-top:0}
 .content img{max-width:100%}
+
+@media (max-width: 760px){
+  .header-inner{flex-wrap:wrap}
+  .site-title{font-size:22px}
+  .hero h1{font-size:40px}
+  .subtitle{font-size:20px}
+  .top-nav a{font-size:13px}
+}

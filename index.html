@@ -7,7 +7,7 @@ layout: default
   <p class="subtitle">실험하고 기록하고, 배운 것을 자산으로 남깁니다.</p>
 </section>
 
-<section class="section">
+<section id="recent" class="section">
   <h2>Recent Experiments</h2>
   <ul class="post-list">
     {% assign shown = 0 %}
@@ -16,7 +16,11 @@ layout: default
         <li>
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
           <span class="meta">{{ post.date | date: "%Y-%m-%d" }}</span>
-          {% if post.excerpt %}<p class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>{% endif %}
+          {% if post.summary %}
+            <p class="excerpt">{{ post.summary }}</p>
+          {% elsif post.excerpt %}
+            <p class="excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+          {% endif %}
         </li>
         {% assign shown = shown | plus: 1 %}
         {% if shown >= 10 %}{% break %}{% endif %}
@@ -25,7 +29,7 @@ layout: default
   </ul>
 </section>
 
-<section class="section">
+<section id="weekly" class="section">
   <h2>Weekly Highlights</h2>
   {% assign weekly_posts = site.posts | where_exp: "post", "post.categories contains 'weekly'" %}
   {% if weekly_posts.size == 0 %}
@@ -42,7 +46,7 @@ layout: default
   {% endif %}
 </section>
 
-<section class="section">
+<section id="next" class="section">
   <h2>Next Experiments</h2>
   <p class="muted">(추가 예정)</p>
 </section>
