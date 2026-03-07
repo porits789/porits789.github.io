@@ -31,8 +31,10 @@ updated_at: 2026-03-07
 5. 실패 시 즉시 1회 재시도
 6. 재시도 실패 건은 daily 23:00 보정 큐로 이관
 
-## 중복 방지 키(초안)
+## 중복 방지 키(확정)
 - {date}-{commitHash|eventId}
+- push(main) 기반 내부 로그의 기본 키: `{YYYY-MM-DD}-{shaShort}`
+- 키가 동일하면 **생성 스킵 + duplicates.log에 기록**
 
 ## 장애/복구 (확정)
 - 실패 로그 저장

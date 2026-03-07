@@ -39,5 +39,5 @@ jobs:
             echo "No staged changes"
             exit 0
           fi
-          git commit -m "chore: add push log post (${{ github.sha }})"
+          git commit -m "chore: add internal push log (${{ github.sha }})"
           git push

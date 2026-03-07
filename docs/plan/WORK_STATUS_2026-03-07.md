@@ -42,6 +42,13 @@ updated_at: 2026-03-07
   - 변경 정책: push 로그를 **블로그 포스트(_posts)** 로 만들지 않고, **내부 운영 로그(`docs/ops/push-logs`)** 로 저장
 - DoD: PASS (워크플로 실행 성공 + 내부 로그 커밋 확인)
 
+### T4 — 중복 방지 및 idempotency (진행 중)
+- 상태: in-progress
+- 목표:
+  - 중복 키 `{date}-{commitHash|eventId}` 적용
+  - 동일 이벤트 재실행 시 중복 파일 생성 방지
+  - 중복 감지 로그 남김
+
 ## 운영 룰 참조
 - 프로젝트 운영/보고 규칙은 `docs/plan/PROJECT_RULES.md`를 기준으로 한다.
 - 특히, 사용자 트리거 없이도 각 T 완료 시 즉시 사용자 안내를 수행한다.
