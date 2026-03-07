@@ -34,6 +34,8 @@ updated_at: 2026-03-07
 
 ### T3 — Push 이벤트 자동 포스트 생성기 (진행 중)
 - 상태: in-progress
-- 목표:
-  - push(main) 시 _posts에 1개 포스트 자동 생성
-  - source에 commit hash 포함
+- 구현 내용:
+  - GitHub Actions workflow 추가: `.github/workflows/push-log.yml`
+  - 생성 스크립트: `scripts/gen_push_post.sh`
+- 주의:
+  - untracked 파일도 커밋되도록 workflow의 변경 감지 로직 필요(반영 중)
