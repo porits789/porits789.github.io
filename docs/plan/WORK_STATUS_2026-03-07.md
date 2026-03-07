@@ -17,6 +17,8 @@ updated_at: 2026-03-07
 
 ## 진행 로그
 
+> 운영 규칙: push 로그는 **블로그(_posts) 금지**. 내부 문서 `docs/ops/push-logs/`로만 유지.
+
 ### T1 — Jekyll 블로그 기본 골격 세팅 ✅
 - 상태: done
 - 핵심 산출:
