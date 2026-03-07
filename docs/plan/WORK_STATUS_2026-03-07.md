@@ -32,10 +32,14 @@ updated_at: 2026-03-07
   - 랜딩에서 weekly 분리 표시 확인(Recent Experiments에서 weekly 제외)
 - DoD: PASS
 
-### T3 — Push 이벤트 자동 포스트 생성기 ✅
+### T3 — Push 이벤트 자동 포스트 생성기 ✅ (정책 변경 반영)
 - 상태: done
 - 구현 내용:
   - GitHub Actions workflow: `.github/workflows/push-log.yml`
   - 생성 스크립트: `scripts/gen_push_post.sh`
-  - push 시 포스트 생성 후 커밋/푸시(워크플로에서 untracked 변경까지 감지)
-- DoD: PASS (워크플로 실행 성공 + 자동 생성 포스트 커밋 확인)
+  - 변경 정책: push 로그를 **블로그 포스트(_posts)** 로 만들지 않고, **내부 운영 로그(`docs/ops/push-logs`)** 로 저장
+- DoD: PASS (워크플로 실행 성공 + 내부 로그 커밋 확인)
+
+## 운영 룰 참조
+- 프로젝트 운영/보고 규칙은 `docs/plan/PROJECT_RULES.md`를 기준으로 한다.
+- 특히, 사용자 트리거 없이도 각 T 완료 시 즉시 사용자 안내를 수행한다.

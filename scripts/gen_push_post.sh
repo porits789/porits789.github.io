@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Generates a Jekyll post for the current HEAD commit.
+# Generates an INTERNAL push log (not a public blog post).
 # Intended for GitHub Actions on `push` to `main`.
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -12,13 +12,13 @@ SHA_SHORT="$(echo "$SHA_FULL" | cut -c1-8)"
 DATE_YMD="$(date +%Y-%m-%d)"
 TIME_KST="$(TZ=Asia/Seoul date +"%Y-%m-%d %H:%M:%S %z")"
 
-POST_DIR="_posts"
-mkdir -p "$POST_DIR"
+LOG_DIR="docs/ops/push-logs"
+mkdir -p "$LOG_DIR"
 
-FILENAME="$POST_DIR/${DATE_YMD}-push-${SHA_SHORT}.md"
+FILENAME="$LOG_DIR/${DATE_YMD}-push-${SHA_SHORT}.md"
 
 if [[ -f "$FILENAME" ]]; then
-  echo "Post already exists: $FILENAME"
+  echo "Log already exists: $FILENAME"
   exit 0
 fi
 
@@ -27,20 +27,11 @@ COMMIT_BODY="$(git log -1 --pretty=%b "$SHA_FULL" 2>/dev/null || true)"
 CHANGED_FILES="$(git show --pretty="" --name-only "$SHA_FULL" 2>/dev/null | sed '/^$/d' || true)"
 
 cat > "$FILENAME" <<EOF
----
-layout: post
-title: "Push Log — ${SHA_SHORT}"
-date: ${TIME_KST}
-tags: [push-log]
-source: "git:${SHA_FULL}"
-summary: "${COMMIT_SUBJECT}"
-status: published
----
+# Push Log — ${SHA_SHORT}
 
-## Commit
-
-- SHA: \`${SHA_FULL}\`
-- Subject: ${COMMIT_SUBJECT}
+- time_kst: ${TIME_KST}
+- sha: ${SHA_FULL}
+- subject: ${COMMIT_SUBJECT}
 
 ## Details
 
@@ -51,4 +42,4 @@ ${COMMIT_BODY}
 $(if [[ -n "$CHANGED_FILES" ]]; then echo "$CHANGED_FILES" | sed 's/^/- /'; else echo "- (none)"; fi)
 EOF
 
-echo "Generated: $FILENAME"
+echo "Generated internal log: $FILENAME"
