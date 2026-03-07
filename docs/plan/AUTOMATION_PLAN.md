@@ -45,5 +45,5 @@ updated_at: 2026-03-07
 - 주간 요약 생성 성공
 
 ## 미결사항(TBD)
-- 워크플로 실행 위치(CI/local)
+- (해결) 워크플로 실행 위치: GitHub Actions(CI)에서 실행 (push to main)
 - 보정 큐의 최대 지연 허용 시간(SLA)

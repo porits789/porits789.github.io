@@ -32,10 +32,10 @@ updated_at: 2026-03-07
   - 랜딩에서 weekly 분리 표시 확인(Recent Experiments에서 weekly 제외)
 - DoD: PASS
 
-### T3 — Push 이벤트 자동 포스트 생성기 (진행 중)
-- 상태: in-progress
+### T3 — Push 이벤트 자동 포스트 생성기 ✅
+- 상태: done
 - 구현 내용:
-  - GitHub Actions workflow 추가: `.github/workflows/push-log.yml`
+  - GitHub Actions workflow: `.github/workflows/push-log.yml`
   - 생성 스크립트: `scripts/gen_push_post.sh`
-- 주의:
-  - untracked 파일도 커밋되도록 workflow의 변경 감지 로직 필요(반영 중)
+  - push 시 포스트 생성 후 커밋/푸시(워크플로에서 untracked 변경까지 감지)
+- DoD: PASS (워크플로 실행 성공 + 자동 생성 포스트 커밋 확인)
