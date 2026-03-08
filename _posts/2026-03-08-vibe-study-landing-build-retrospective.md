@@ -10,7 +10,7 @@ status: published
 
 팀원을 구하고 싶었다. 그게 시작이었다. 그런데 단순히 정보만 적어 둔 페이지가 아니라, "한 번 들어왔을 때 분위기와 의도가 바로 전달되는 페이지"를 만들고 싶었다. 그래서 이번 작업은 모집 페이지 제작이면서 동시에 "예쁜 것도 제대로 해보는" 실험이 됐다.
 
-랜딩 페이지 프로젝트 링크: [vibe_coding_landing_page](https://github.com/porits789/vibe_study_landing_project)
+랜딩 페이지 링크: [Vibe Study Landing](https://vibestudylandingproject.vercel.app/#)
 
 ![바이브 스터디 랜딩 페이지 캡처](/assets/images/posts/vibe-study-landing-2026-03-08.jpg)
 
