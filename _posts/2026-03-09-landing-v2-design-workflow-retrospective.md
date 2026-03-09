@@ -38,5 +38,3 @@ status: draft
 
 또한 다음 실험부터는 배포 전 시안 2안 비교와 라이트/다크 동시 QA를 필수화해, 감각이 아니라 기준 기반으로 품질을 고정할 예정이다.
 
----
-문의 메일: [porits789@gmail.com](mailto:porits789@gmail.com)
