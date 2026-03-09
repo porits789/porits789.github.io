@@ -20,5 +20,11 @@ updated_at: 2026-03-07
 ## 2) 페이지 노출 점검(필수)
 - robots.txt / sitemap.xml / canonical meta 확인
 
-## 3) 승인
+## 3) Front Design QA (프론트 작업 시 필수)
+- [ ] 컬러 분포 70/20/10 준수(Accent 과다 사용 없음)
+- [ ] 라이트/다크 비교 시 체감 차이 명확
+- [ ] Hero/본문/CTA 섹션 강도 계층 유지
+- [ ] 버튼/폼/FAQ 상태(hover/focus/open/disabled) 구분 가능
+
+## 4) 승인
 - SECURITY_GATE 문서의 PASS 조건을 충족했음을 확인 후 진행
