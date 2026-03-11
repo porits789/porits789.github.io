@@ -32,3 +32,6 @@
   - Dev: 랜딩 IA/컴포넌트 구현, 실험 카드 데이터 소스 연결, 성능 최적화.
   - Runner: 반응형/브라우저 점검, 링크 무결성, 기본 지표 수집 확인.
   - Security: 공개 전 robots/sitemap/메타 설정 검토 및 민감정보 노출 점검.
+
+- **Related Specs:**
+  - 블로그 자동 기록 스펙: [`/docs/specs/blog-auto-record/SPEC_LITE.md`](/docs/specs/blog-auto-record/SPEC_LITE.md)

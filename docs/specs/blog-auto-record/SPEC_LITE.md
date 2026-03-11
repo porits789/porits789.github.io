@@ -33,3 +33,6 @@
   - Dev: 이벤트/스케줄 기반 생성기 구현, 중복 방지 키 설계, MDX 템플릿 적용.
   - Runner: 트리거/크론 실행 검증, 누락/중복 회귀 테스트, 주간 요약 생성 확인.
   - Security: 공개 전 민감정보 필터(토큰/키/개인정보 패턴) 점검 규칙 추가.
+
+- **Related Specs:**
+  - 랜딩/노출 실험 스펙: [`/docs/specs/landingpage-experiment/SPEC_LITE.md`](/docs/specs/landingpage-experiment/SPEC_LITE.md)
